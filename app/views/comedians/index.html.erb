@@ -1,9 +1,16 @@
 <h1>All Comedians</h1>
 
 <% @comedians.each do |comedian| %>
-<section id='<%= comedian.id %>' >
+<section id='comedian-<%= comedian.id %>' >
   <h2><%= comedian.name %></h2>
   <h2><%= comedian.age %></h2>
   <h2><%= comedian.hometown %></h2>
 </section>
+
+<%comedian.specials.each do |special| %>
+  <section id='special-<%= special.id %>' >
+    <h2><%= special.name %></h2>
+    <h2><%= special.runtime %></h2>
+  </section>
+  <% end %>
 <% end %>
