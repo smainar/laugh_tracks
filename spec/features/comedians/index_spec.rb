@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe "comedians index page", type: :feature do
   before(:each) do
-    @comedian_1 = Comedian.create(name: 'Demetri Martin', age: 45, hometown: 'New York City')
-    @comedian_2 = Comedian.create(name: 'Steve Martin', age: 73, hometown: 'Waco')
+    @comedian_1 = Comedian.create(name: 'Demetri Martin', age: 45, hometown: 'New York City', image: 'https://m.media-amazon.com/images/M/MV5BMjA3Nzg5MzM2Nl5BMl5BanBnXkFtZTcwODYzOTAzMg@@._V1_UY317_CR20,0,214,317_AL_.jpg')
+    @comedian_2 = Comedian.create(name: 'Steve Martin', age: 73, hometown: 'Waco', image: 'https://m.media-amazon.com/images/M/MV5BNDY0ODYwNDM3OV5BMl5BanBnXkFtZTcwMTc3NjQzMg@@._V1_UX214_CR0,0,214,317_AL_.jpg')
 
     @special_1 = @comedian_1.specials.create!(name: "Special 1", runtime: 45)
     @special_2 = @comedian_1.specials.create!(name: "Special 2", runtime: 50)
@@ -31,7 +31,6 @@ RSpec.describe "comedians index page", type: :feature do
 
   it "user sees a list of each comedian's TV specials, including name and run time (minutes)" do
     visit "/comedians"
-    save_and_open_page
 
     within "#special-#{@special_1.id}" do
       expect(page).to have_content(@special_1.name)
@@ -45,6 +44,18 @@ RSpec.describe "comedians index page", type: :feature do
       expect(page).to have_content(@special_2.runtime)
 
       expect(page).to_not have_content(@special_1.name)
+    end
+  end
+
+  it "user can see a thumbnail image for each comedian" do
+    visit "/comedians"
+
+    within "#comedian-#{@comedian_1.id}" do
+      expect(page).to have_css("img[src='#{@comedian_1.image}']")
+    end
+
+    within "#comedian-#{@comedian_2.id}" do
+      expect(page).to have_css("img[src='#{@comedian_2.image}']")
     end
   end
 end
