@@ -7,13 +7,18 @@ RSpec.describe "comedians index page", type: :feature do
 
     visit "/comedians"
 
-    expect(page).to have_content(comedian_1.name)
-    expect(page).to have_content(comedian_1.age)
-    expect(page).to have_content(comedian_1.hometown)
-    # expect(page).to have_xpath("//img[contains(@src,'#{comedian_1.image}')]")
-    expect(page).to have_content(comedian_2.name)
-    expect(page).to have_content(comedian_2.age)
-    expect(page).to have_content(comedian_2.hometown)
-    # expect(page).to have_xpath("//img[contains(@src,'#{comedian_2.image}')]")
+    within "##{comedian_1.id}" do
+      expect(page).to have_content(comedian_1.name)
+      expect(page).to have_content(comedian_1.age)
+      expect(page).to have_content(comedian_1.hometown)
+      # expect(page).to have_xpath("//img[contains(@src,'#{comedian_1.image}')]")
+    end
+
+    within "##{comedian_2.id}" do
+      expect(page).to have_content(comedian_2.name)
+      expect(page).to have_content(comedian_2.age)
+      expect(page).to have_content(comedian_2.hometown)
+      # expect(page).to have_xpath("//img[contains(@src,'#{comedian_2.image}')]")
+    end
   end
 end
