@@ -2,6 +2,7 @@
 
 <% @comedians.each do |comedian| %>
 <section id='comedian-<%= comedian.id %>' >
+  <%= image_tag(comedian.image) %>
   <h2><%= comedian.name %></h2>
   <h2><%= comedian.age %></h2>
   <h2><%= comedian.hometown %></h2>
