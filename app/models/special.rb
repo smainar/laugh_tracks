@@ -1,5 +1,5 @@
 class Special < ApplicationRecord
-  has_many :comedians
+  belongs_to :comedian
 
   validates_presence_of :name
 end
