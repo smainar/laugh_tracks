@@ -8,4 +8,8 @@ class Comedian < ApplicationRecord
   def self.find_age(age)
     self.where(age: age)
   end
+
+  def self.average_age
+
+  end
 end
