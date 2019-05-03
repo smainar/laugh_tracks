@@ -18,14 +18,12 @@ RSpec.describe "comedians index page", type: :feature do
       expect(page).to have_content(@comedian_1.name)
       expect(page).to have_content(@comedian_1.age)
       expect(page).to have_content(@comedian_1.hometown)
-      # expect(page).to have_xpath("//img[contains(@src,'#{comedian_1.image}')]")
     end
 
     within "#comedian-#{@comedian_2.id}" do
       expect(page).to have_content(@comedian_2.name)
       expect(page).to have_content(@comedian_2.age)
       expect(page).to have_content(@comedian_2.hometown)
-      # expect(page).to have_xpath("//img[contains(@src,'#{comedian_2.image}')]")
     end
   end
 
@@ -53,9 +51,19 @@ RSpec.describe "comedians index page", type: :feature do
     within "#comedian-#{@comedian_1.id}" do
       expect(page).to have_css("img[src='#{@comedian_1.image}']")
     end
+  end
 
-    within "#comedian-#{@comedian_2.id}" do
-      expect(page).to have_css("img[src='#{@comedian_2.image}']")
-    end
+  it "user sees the list of comedians on the page that match the age criteria" do
+
+    comedian_3 = Comedian.create(name: 'Bob', age: 45, hometown: 'New York City', image: 'https://m.media-amazon.com/images/M/MV5BMjA3Nzg5MzM2Nl5BMl5BanBnXkFtZTcwODYzOTAzMg@@._V1_UY317_CR20,0,214,317_AL_.jpg')
+    comedian_4 = Comedian.create(name: 'Sally', age: 73, hometown: 'Waco', image: 'https://m.media-amazon.com/images/M/MV5BNDY0ODYwNDM3OV5BMl5BanBnXkFtZTcwMTc3NjQzMg@@._V1_UX214_CR0,0,214,317_AL_.jpg')
+
+    visit "/comedians?age=45"
+
+      expect(page).to have_content(@comedian_1.age)
+      expect(page).to have_content(comedian_3.age)
+
+      expect(page).to_not have_content(@comedian_2.age)
+      expect(page).to_not have_content(comedian_4.age)
   end
 end
