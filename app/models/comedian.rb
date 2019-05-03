@@ -4,4 +4,8 @@ class Comedian < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :age
   validates_presence_of :hometown
+
+  def self.find_age(age)
+    self.where(age: age)
+  end
 end
