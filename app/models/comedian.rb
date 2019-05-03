@@ -10,6 +10,6 @@ class Comedian < ApplicationRecord
   end
 
   def self.average_age
-
+    self.average(:age)
   end
 end
