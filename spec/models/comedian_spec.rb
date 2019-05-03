@@ -5,7 +5,6 @@ RSpec.describe Comedian, type: :model do
     it { should validate_presence_of :name }
     it { should validate_presence_of :age }
     it { should validate_presence_of :hometown }
-    it { should validate_presence_of :image }
   end
 
   describe 'relationships' do
