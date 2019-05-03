@@ -11,7 +11,7 @@ RSpec.describe "comedians index page", type: :feature do
     @special_4 = @comedian_2.specials.create!(name: "Special 4", runtime: 60)
   end
 
-  it "user can see a list of all comedians with their name, age, and hometown" do
+  it "visitor can see a list of all comedians with their name, age, and hometown" do
     visit "/comedians"
 
     within "#comedian-#{@comedian_1.id}" do
@@ -27,7 +27,7 @@ RSpec.describe "comedians index page", type: :feature do
     end
   end
 
-  it "user sees a list of each comedian's TV specials, including name and run time (minutes)" do
+  it "visitor sees a list of each comedian's TV specials, including name and run time (minutes)" do
     visit "/comedians"
 
     within "#special-#{@special_1.id}" do
@@ -45,7 +45,7 @@ RSpec.describe "comedians index page", type: :feature do
     end
   end
 
-  it "user can see a thumbnail image for each comedian" do
+  it "visitor can see a thumbnail image for each comedian" do
     visit "/comedians"
 
     within "#comedian-#{@comedian_1.id}" do
@@ -53,7 +53,7 @@ RSpec.describe "comedians index page", type: :feature do
     end
   end
 
-  it "user sees the list of comedians on the page that match the age criteria" do
+  it "visitor sees the list of comedians on the page that match the age criteria" do
 
     comedian_3 = Comedian.create(name: 'Bob', age: 45, hometown: 'New York City', image: 'https://m.media-amazon.com/images/M/MV5BMjA3Nzg5MzM2Nl5BMl5BanBnXkFtZTcwODYzOTAzMg@@._V1_UY317_CR20,0,214,317_AL_.jpg')
     comedian_4 = Comedian.create(name: 'Sally', age: 73, hometown: 'Waco', image: 'https://m.media-amazon.com/images/M/MV5BNDY0ODYwNDM3OV5BMl5BanBnXkFtZTcwMTc3NjQzMg@@._V1_UX214_CR0,0,214,317_AL_.jpg')
@@ -66,4 +66,23 @@ RSpec.describe "comedians index page", type: :feature do
       expect(page).to_not have_content(@comedian_2.age)
       expect(page).to_not have_content(comedian_4.age)
   end
+
+  # As a visitor
+  # When I visit `/comedians`
+  # Then I see an area at the top of the page called 'Statistics'
+  # In that 'Statistics' area, I see the following information:
+  # - the average age of all comedians on the page (if the page is filtered for specific comedians, the statistics should reflect the new group)
+  # - a unique list of cities for each comedian on the page
+  #
+  # Averaging and uniqueness should be done in ActiveRecord NOT
+  # using Ruby
+  it "visitor sees area at top of the page called 'Statistics'
+  for average age of all comedians" do
+     visit "/comedians"
+
+     within ".statistics" do
+       expect(page).to have_content("Statistics")
+       expect(page).to have_content("#{Comedian.average_age}")
+     end
+   end
 end
