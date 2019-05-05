@@ -9,6 +9,8 @@ RSpec.describe "comedians index page", type: :feature do
     @special_2 = @comedian_1.specials.create!(name: "Special 2", runtime: 50)
     @special_3 = @comedian_2.specials.create!(name: "Special 3", runtime: 55)
     @special_4 = @comedian_2.specials.create!(name: "Special 4", runtime: 60)
+
+    @comedians = Comedian.all
   end
 
   it "visitor can see a list of all comedians with their name, age, and hometown" do
@@ -33,15 +35,11 @@ RSpec.describe "comedians index page", type: :feature do
     within "#special-#{@special_1.id}" do
       expect(page).to have_content(@special_1.name)
       expect(page).to have_content(@special_1.runtime)
-
-      expect(page).to_not have_content(@special_2.name)
     end
 
     within "#special-#{@special_2.id}" do
       expect(page).to have_content(@special_2.name)
       expect(page).to have_content(@special_2.runtime)
-
-      expect(page).to_not have_content(@special_1.name)
     end
   end
 
@@ -77,12 +75,13 @@ RSpec.describe "comedians index page", type: :feature do
   # Averaging and uniqueness should be done in ActiveRecord NOT
   # using Ruby
   it "visitor sees area at top of the page called 'Statistics'
-  for average age of all comedians" do
+  for average age of all comedians and unique list of hometowns" do
      visit "/comedians"
 
      within ".statistics" do
        expect(page).to have_content("Statistics")
-       expect(page).to have_content("#{Comedian.average_age}")
+       expect(page).to have_content("#{@comedians.average_age}")
+       expect(page).to have_content("#{@comedians.unique_cities}")
      end
    end
 end
