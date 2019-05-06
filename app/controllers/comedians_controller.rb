@@ -15,8 +15,10 @@ class ComediansController < ApplicationController
   end
 
   def create
-    Comedian.create(comedian_params)
-    redirect_to "/comedians"
+    comedian = Comedian.new(comedian_params)
+    if comedian.save
+      redirect_to "/comedians"
+    end
   end
 
   def average_age
