@@ -65,6 +65,18 @@ RSpec.describe "comedians index page", type: :feature do
       expect(page).to_not have_content(comedian_4.age)
   end
 
+  it "visitor sees a count of each comedian's TV specials" do
+    visit "/comedians"
+
+    within "#comedian-#{@comedian_1.id}" do
+      expect(page).to have_content("Number of tv specials: #{@comedian_1.specials_count}")
+    end
+
+    within "#comedian-#{@comedian_2.id}" do
+      expect(page).to have_content("Number of tv specials: #{@comedian_2.specials_count}")
+    end
+  end
+
   it "visitor sees area at top of the page called 'Statistics'
   for average age of all comedians and unique list of hometowns" do
      visit "/comedians"
