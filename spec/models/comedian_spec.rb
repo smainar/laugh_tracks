@@ -35,7 +35,7 @@ RSpec.describe Comedian, type: :model do
 
     it ".unique_cities" do
 
-      expect(@comedians.unique_cities).to eq(['Waco','New York City'])
+      expect(@comedians.unique_cities).to eq("New York City, Waco")
     end
   end
 end
