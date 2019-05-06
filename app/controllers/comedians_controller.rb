@@ -7,6 +7,7 @@ class ComediansController < ApplicationController
       @comedians = Comedian.find_age(params[:age])
     end
     @average_age = @comedians.average_age
+    @unique_cities = @comedians.unique_cities
   end
 
   def new
