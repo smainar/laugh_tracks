@@ -20,9 +20,6 @@ class ComediansController < ApplicationController
     end
   end
 
-  def average_age
-  end
-
   private
   def comedian_params
     params.require(:comedian).permit(:name, :age, :hometown)
