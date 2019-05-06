@@ -65,15 +65,6 @@ RSpec.describe "comedians index page", type: :feature do
       expect(page).to_not have_content(comedian_4.age)
   end
 
-  # As a visitor
-  # When I visit `/comedians`
-  # Then I see an area at the top of the page called 'Statistics'
-  # In that 'Statistics' area, I see the following information:
-  # - the average age of all comedians on the page (if the page is filtered for specific comedians, the statistics should reflect the new group)
-  # - a unique list of cities for each comedian on the page
-  #
-  # Averaging and uniqueness should be done in ActiveRecord NOT
-  # using Ruby
   it "visitor sees area at top of the page called 'Statistics'
   for average age of all comedians and unique list of hometowns" do
      visit "/comedians"
