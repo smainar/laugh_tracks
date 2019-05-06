@@ -12,4 +12,11 @@ class Comedian < ApplicationRecord
   def self.average_age
     self.average(:age)
   end
+
+  def self.unique_cities
+    cities = self.select(:hometown).distinct.map do |comedian|
+      comedian.hometown
+    end
+    cities.sort.join(", ")
+  end
 end
