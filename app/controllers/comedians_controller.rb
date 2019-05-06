@@ -1,10 +1,9 @@
 class ComediansController < ApplicationController
   def index
-    # @average_age = Comedian.average_age
-    if params[:age].nil?
-      @comedians = Comedian.all
-    else
+    if params[:age]
       @comedians = Comedian.find_age(params[:age])
+    else
+      @comedians = Comedian.all
     end
     @average_age = @comedians.average_age
     @unique_cities = @comedians.unique_cities
@@ -15,11 +14,10 @@ class ComediansController < ApplicationController
   end
 
   def create
-    Comedian.create(comedian_params)
-    redirect_to "/comedians"
-  end
-
-  def average_age
+    comedian = Comedian.new(comedian_params)
+    if comedian.save
+      redirect_to "/comedians"
+    end
   end
 
   private

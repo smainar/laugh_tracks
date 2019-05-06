@@ -58,11 +58,21 @@ RSpec.describe "comedians index page", type: :feature do
 
     visit "/comedians?age=45"
 
+      expect(page).to have_content(@comedian_1.name)
       expect(page).to have_content(@comedian_1.age)
-      expect(page).to have_content(comedian_3.age)
+      expect(page).to have_content(@comedian_1.hometown)
 
+      expect(page).to have_content(comedian_3.name)
+      expect(page).to have_content(comedian_3.age)
+      expect(page).to have_content(comedian_3.hometown)
+
+      expect(page).to_not have_content(@comedian_2.name)
       expect(page).to_not have_content(@comedian_2.age)
+      expect(page).to_not have_content(@comedian_2.hometown)
+      
+      expect(page).to_not have_content(comedian_4.name)
       expect(page).to_not have_content(comedian_4.age)
+      expect(page).to_not have_content(comedian_4.hometown)
   end
 
   it "visitor sees a count of each comedian's TV specials" do

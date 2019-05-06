@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+
+ .comedians-info {
+   box-shadow: -6px 8px 6px -6px black;
+   padding: 45px;
+   background-color: #878f99;
+   border-radius: 8px;
+   box-sizing: border-box;
+   text-align: center;
+ }
+
+ .specials-container {
+   box-shadow: -6px 8px 6px -6px black;
+   border-radius: 8px;
+   padding: 45px;
+   color: white;
+   background: 	#6b5b95;
+   margin: 20px;
+   padding: 20px;
+   border: black 5px;
+   text-align:center;
+ }
