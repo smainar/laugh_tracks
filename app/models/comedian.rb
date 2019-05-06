@@ -9,6 +9,10 @@ class Comedian < ApplicationRecord
     self.where(age: age)
   end
 
+  def specials_count
+    self.specials.count
+  end
+
   def self.average_age
     self.average(:age)
   end
